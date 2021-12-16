@@ -1,0 +1,221 @@
+---
+title: 'Digital Clock'
+publishedAt: '2021-12-17'
+summary: 'Vanilla Digital Clock with Vanilla JavaScripts.'
+---
+
+This is my way of creating a digital with just HTML, SCSS, and vanilla JavaScripts. Let me tell you how.
+
+## Procedures
+
+1. Create a folder with any name you want.
+2. Go into the folder you have created and enter your favorite text editor.
+3. Create an HTML file with the name `index.html`. Here's the syntax.
+
+```html:index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body onload="initClock()">
+    <!-- greeting -->
+    <h1 id="greeting"></h1>
+
+    <!--Clock Start-->
+    <div class="datetime">
+      <div class="date">
+        <span id="dayname">Day</span>,
+        <span id="month">Month</span>
+        <span id="daynum">00</span>,
+        <span id="year">Year</span>
+      </div>
+      <div class="time">
+        <span id="hour">00</span>: <span id="minutes">00</span>:
+        <span id="seconds">00</span>
+        <span id="period">AM</span>
+      </div>
+    </div>
+    <!-- Clock end -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <p>
+        2021 | Made with <span style="color: #e25555">&#9829;</span> by
+        <a href="https://www.instagram.com/kbrnugroho/" target="_blank"> Naufal Akbar Nugroho</a>
+      </p>
+    </footer>
+    <!-- footer end -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+4. And then, let's we create the `styles.css`. Here's the syntax.
+
+```css:style.css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #10101e;
+  font-family: "Segoe UI", sans-serif;
+  flex-direction: column;
+}
+
+#greeting {
+  color: #ffff;
+  margin-bottom: 10px;
+}
+
+.datetime {
+  color: #ffff;
+  background: #10101e;
+  width: 340px;
+  padding: 15px, 10px;
+  border: 3px solid #2e94e3;
+  border-radius: 5px;
+  -webkit-box-reflect: below 1px linear-gradient(tranparent, rgba(255, 255, 255, 0.1));
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+  cursor: pointer;
+}
+
+.datetime:hover {
+  background: #2e94e3;
+  box-shadow: 0 0 30px #2e94e3;
+}
+
+.date {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.time {
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time span:not(:last-child) {
+  position: relative;
+  margin: 0 6px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.time span:last-child {
+  background: #2e94e3;
+  font-size: 30px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-top: 10px;
+  padding: 0 5px;
+  border-radius: 3px;
+}
+
+.footer {
+  position: absolute;
+  top: 42em;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  color: white;
+  cursor: default;
+}
+
+.footer p {
+  padding: 10px;
+  margin-top: -10px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer a:hover {
+  color: #dedede;
+}
+```
+
+5. Last thing, we create the `script.js` file. Here's the syntax.
+
+```js:script.js
+// clock start
+function updateClock() {
+  var now = new Date();
+  var dname = now.getDay();
+  mo = now.getMonth();
+  dnum = now.getDate();
+  yr = now.getFullYear();
+  hou = now.getHours();
+  min = now.getMinutes();
+  sec = now.getSeconds();
+  pe = "AM";
+  var midday;
+  var name = "Nopal";
+
+  midday = hou >= 12 ? "PM" : "AM";
+
+  if (hou < 12) {
+    var greeting = "Good Morning, " + name + "!";
+  } else if (hou >= 12 && hou <= 18) {
+    var greeting = "Good Afternoon, " + name + "!";
+  } else if (hou >= 18 && hou <= 21) {
+    var greeting = "Good Evening, " + name + "!";
+  } else if (hou >= 21 && hou <= 24) {
+    var greeting = "Good Night, " + name + "!";
+  }
+
+  document.getElementById("greeting").innerHTML = greeting;
+
+  Number.prototype.pad = function (digits) {
+    for (var n = this.toString(); n.length < digits; n = 0 + n);
+    return n;
+  };
+
+  var months = ["January", "February", "March", "April", "May", "june", "July", "August", "September", "October", "November", "December"];
+  var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var ids = ["dayname", "month", "daynum", "year", "hour", "minutes", "seconds", "period"];
+  var values = [week[dname], months[mo], dnum.pad(2), yr, hou.pad(2), min.pad(2), sec.pad(2), pe];
+  for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+}
+
+function initClock() {
+  updateClock();
+  window.setInterval("updateClock()", 1);
+}
+```
+
+6. And so we have our **Digital Clock** using HTML, SCSS, and Vanilla JavaScript!
+
+[Demo site](https://nuflakbrr.github.io/digital-clock/)
+
+## Finishing Up
+
+**Congratulation!** You have finished the tutorial on how to create a **Digital Clock** using HTML, SCSS, Vanilla Javascript! I hope this blog can benefit you all and don't forget to share this blog to everyone! Thank you!
+
+## Follow Me!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[Twitter](https://www.twitter.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)
