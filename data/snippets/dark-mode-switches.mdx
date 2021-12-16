@@ -1,0 +1,178 @@
+---
+title: 'Dark Mode Switches'
+publishedAt: '2021-12-16'
+summary: 'Vanilla Dark Mode Switches with Vanilla JavaScripts'
+---
+
+This is my way of creating a dark mode switches with just HTML, SCSS, and vanilla JavaScripts. Let me tell you how.
+
+## Procedures
+
+1. Create a folder with any name you want.
+2. Go into the folder you have created and enter your favorite text editor.
+3. Create an HTML file with the name `index.html`. Here's the syntax.
+
+```html:index.html
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Toggle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Light / Dark Mode</h1>
+        <div class="toggle-container">
+            <input type="checkbox" name="theme" id="switch">
+            <label for="switch">Toggle</label>
+        </div>
+        
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eveniet adipisci non blanditiis, quod minus, quisquam omnis asperiores et laborum debitis voluptates, sapiente sed tenetur laboriosam commodi itaque impedit possimus aut. Officia excepturi labore nam, qui voluptatem molestiae vero. Cupiditate deserunt maxime aut iste esse velit aliquid provident explicabo totam unde.</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+4. And then, let's we create the `styles.css`. Here's the syntax.
+
+```css:style.css
+html {
+    height: 100%;
+    font-family: 'Montserrat';
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    --bg: #fcfcfc;
+    --bg-panel: #EBEBEB;
+    --color-headings: #0077FF;
+    --color-text: #333333;
+}
+
+html[data-theme='dark'] {
+    --bg: #333333;
+    --bg-panel: #434343;
+    --color-headings: #3694ff;
+    --color-text: #b5b5b5;
+}
+
+body {
+    background-color: var(--bg);
+}
+
+.container {
+    background-color: var(--bg-panel);
+    margin: 5em;
+    padding: 5em;
+    border-radius: 15px;
+
+    display: grid;
+    grid-template-columns: 80% auto;
+    grid-template-rows: auto auto;
+    grid-template-areas: "title switch" "content content";
+}
+
+h1 {
+    margin: 0;
+    color: var(--color-headings);
+}
+
+p {
+    color: var(--color-text);
+    grid-area: content;
+    font-size: 1.1em;
+    line-height: 1.8em;
+    margin-top: 2em;
+}
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 52px;
+	height: 27px;
+	background: grey;
+	float: right;
+	border-radius: 100px;
+	position: relative;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+input:checked + label {
+	background: var(--color-headings);
+}
+
+input:checked + label:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+label:active:after {
+	width: 45px;
+}
+
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
+}
+```
+
+5. Last thing, we create the `script.js` file. Here's the syntax.
+
+```js:script.js
+var checkbox = document.querySelector('input[name=theme]');
+
+checkbox.addEventListener('change', function() {
+    if(this.checked) {
+        trans()
+        document.documentElement.setAttribute('data-theme', 'dark')
+    } else {
+        trans()
+        document.documentElement.setAttribute('data-theme', 'light')
+    }
+})
+
+let trans = () => {
+    document.documentElement.classList.add('transition');
+    window.setTimeout(() => {
+        document.documentElement.classList.remove('transition')
+    }, 1000)
+}
+```
+
+6. And so we have our **Dark Mode Switches** using HTML, SCSS, and Vanilla JavaScript!
+
+## Finishing Up
+
+**Congratulation!** You have finished the tutorial on how to create a **Dark Mode Switches** using HTML, SCSS, Vanilla Javascript! I hope this blog can benefit you all and don't forget to share this blog to everyone! Thank you!
+
+## Follow Me!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[Twitter](https://www.twitter.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)

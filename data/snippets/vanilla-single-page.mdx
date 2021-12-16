@@ -1,0 +1,314 @@
+---
+title: 'Vanilla Single Page'
+publishedAt: '2021-12-10'
+summary: 'Vanilla Single Page With Vanilla JavaScripts'
+---
+
+This is my way of creating a single page with just HTML, SCSS, and vanilla JavaScripts. Let me tell you how.
+
+## Procedures
+
+1. Before starting the project, make sure you already have `node.js` on your computer. If you don't have it, [download here](https://nodejs.org/en/).
+2. Create a folder with any name you want.
+3. Go into the folder you have created and enter your favorite text editor.
+4. Create an HTML file with the name `index.html`. Here's the syntax.
+
+```html:index.html showLineNumbers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanilla Single Page</title>
+    <link rel="stylesheet" href="static/scss/index.css" type="text/css" />
+</head>
+<body>
+    <!-- This is navigation -->
+    <nav class="nav">
+    <a href="/vanilla-singlepage/" class="nav__link" data-link>Dashboard</a>
+    <a href="/vanilla-singlepage/posts" class="nav__link" data-link>Posts</a>
+    <a href="/vanilla-singlepage/settings" class="nav__link" data-link>Settings</a>
+    </nav>
+    <!-- This is end navigation -->
+
+    <!-- These are all the components we created and render in here -->
+    <div id="app"></div>
+
+    <!-- This is where we load the package -->
+    <script type="module" src="static/js/index.js"></script>
+</body>
+</html>
+```
+
+5. Then run the npm syntax.
+
+```bash:cmd
+    $ npm init -y
+```
+
+or
+
+```bash:cmd
+   $ yarn init -y
+```
+
+6. Then install the express module.
+
+```bash:cmd
+    $ npm install express
+```
+
+    or
+
+```bash:cmd
+    $ yarn add express
+```
+
+7. Then create a file with the name `server.js`. Here's the syntax.
+
+```js:server.js showLineNumbers
+const express = require("express"); // this is where we load the package
+const path = require("path"); // this is where we load the path url
+
+const app = express(); // we initialize the package
+
+app.use("/static", express.static(path.resolve(__dirname, "frontend", "static"))); // locate the folder page
+
+app.get("/*", (req, res) => {
+res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
+}); // create path url
+
+app.listen(process.env.PORT || 4040, () => console.log("Server running...")); // the port where the server run
+```
+
+8. Run the server with the following syntax.
+
+```bash:cmd
+    $ node server.js
+```
+
+9. And then go to your browser and visit the link `http://localhost:4040`.
+10. Then create a folder with the name `static` and in it there are 2 folders, namely the `js` and `scss` folders
+11. Then create a folder with the name `view`. in the view folder, create the page you want. in my case I made `Dasboard.js`, `FormatView.js`, `PostView.js`, `Posts.js`, `Settings.js`.
+
+```js:static/js/view/FormatView.js showLineNumbers
+export default class {
+    constructor(params) {
+        this.params = params;
+    }
+
+    setTitle(title) {
+        document.title = title;
+    }
+
+    async getHtml() {
+        return "";
+    }
+}
+```
+
+```js:static/js/view/Dashboard.js showLineNumbers
+import FormatView from "./FormatView.js";
+
+export default class extends FormatView {
+    constructor(params) {
+        super(params);
+        this.setTitle("Dashboard | Vanilla Single Page - Naufal Akbar Nugroho");
+    }
+
+    async getHtml() {
+        return `
+                <h1>Hai, Nopal</h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum earum culpa molestias itaque repudiandae hic laboriosam atque cupiditate? Molestiae nemo fugiat illo error corporis, recusandae et ipsum! Animi, soluta harum.
+                </p>
+                <p>
+                    <a href="/vanilla-singlepage/posts" data-link>View recent posts</a>.
+                </p>
+            `;
+    }
+}
+```
+
+```js:static/js/view/PostView.js showLineNumbers
+import FormatView from "./FormatView.js";
+
+export default class extends FormatView {
+    constructor(params) {
+        super(params);
+        this.postId = params.id;
+        this.setTitle("Viewing Post | Vanilla Single Page - Naufal Akbar Nugroho");
+    }
+
+    async getHtml() {
+        return `
+                <h1>Post</h1>
+                <p>You are viewing post #${this.postId}.</p>
+            `;
+    }
+}
+```
+
+```js:static/js/view/Posts.js showLineNumbers
+import FormatView from "./FormatView.js";
+
+export default class extends FormatView {
+    constructor(params) {
+        super(params);
+        this.setTitle("Posts | Vanilla Single Page - Naufal Akbar Nugroho");
+    }
+
+    async getHtml() {
+        return `
+                <h1>Posts</h1>
+                <p>You are viewing the posts!</p>
+            `;
+    }
+}
+```
+
+```js:static/js/view/Settings.js showLineNumbers
+import FormatView from "./FormatView.js";
+
+export default class extends FormatView {
+    constructor(params) {
+        super(params);
+        this.setTitle("Settings | Vanilla Single Page - Naufal Akbar Nugroho");
+    }
+
+    async getHtml() {
+        return `
+                <h1>Settings</h1>
+                <p>Manage your privacy and configuration.</p>
+            `;
+    }
+}
+```
+
+12. Then create a file with the name `index.js` and the following for the syntax.
+
+```js:static/js/index.js showLineNumbers
+import Dashboard from "./view/Dashboard.js";
+import Posts from "./view/Posts.js";
+import PostView from "./view/PostView.js";
+import Settings from "./view/Settings.js";
+
+const pathToRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
+const getParams = (match) => {
+  const values = match.result.slice(1);
+  const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map((result) => result[1]);
+
+  return Object.fromEntries(
+    keys.map((key, i) => {
+      return [key, values[i]];
+    })
+  );
+};
+
+const navigateTo = (url) => {
+  history.pushState(null, null, url);
+  router();
+};
+
+const router = async () => {
+  const routes = [
+    { path: "/vanilla-singlepage/", view: Dashboard },
+    { path: "/vanilla-singlepage/posts", view: Posts },
+    { path: "/vanilla-singlepage/posts/:id", view: PostView },
+    { path: "/vanilla-singlepage/settings", view: Settings },
+  ];
+
+  // Test each route for potential match
+  const potentialMatches = routes.map((route) => {
+    return {
+      route: route,
+      result: location.pathname.match(pathToRegex(route.path)),
+    };
+  });
+
+  let match = potentialMatches.find((potentialMatch) => potentialMatch.result !== null);
+
+  if (!match) {
+    match = {
+      route: routes[0],
+      result: [location.pathname],
+    };
+  }
+
+  const view = new match.route.view(getParams(match));
+
+  document.querySelector("#app").innerHTML = await view.getHtml();
+};
+
+window.addEventListener("popstate", router);
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.addEventListener("click", (e) => {
+    if (e.target.matches("[data-link]")) {
+      e.preventDefault();
+      navigateTo(e.target.href);
+    }
+  });
+
+  router();
+});
+```
+
+13. Then the moment that we have been waiting for, we make a stlying for the page that we have created.
+
+```scss:static/scss/index.scss showLineNumbers
+body {
+  --nav-width: 200px;
+  margin: 0 0 0 var(--nav-width);
+  font-family: "Quicksand", sans-serif;
+  font-size: 18px;
+  background: #111827;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--nav-width);
+  height: 100vh;
+  background: #1e40af;
+}
+
+.nav__link {
+  display: block;
+  padding: 12px 18px;
+  text-decoration: none;
+  color: #eeeeee;
+  font-weight: 500;
+}
+
+.nav__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#app {
+  margin: 2em;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+a {
+  color: #4b80c4;
+}
+```
+
+14. And so we have our **Vanilla Single Page** using HTML, SCSS, and Vanilla JavaScript!
+
+## Finishing Up
+
+**Congratulation!** You have finished the tutorial on how to create a **Vanilla Single Page** using HTML, SCSS, Vanilla Javascript! I hope this blog can benefit you all and don't forget to share this blog to everyone! Thank you!
+
+## Follow Me!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[Twitter](https://www.twitter.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)
