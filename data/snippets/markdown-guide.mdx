@@ -1,0 +1,202 @@
+---
+title: 'Markdown Guide'
+publishedAt: '2021-12-18'
+summary: 'This is a Syntax Guide for Markdown file.'
+---
+
+## Introduction
+
+Markdown and Mdx parsing is supported via `unified`, and other remark and rehype packages. `next-mdx-remote` allows us to parse `.mdx` and `.md` files in a more flexible manner without touching webpack.
+
+Github flavored markdown is used. `mdx-prism` provides syntax highlighting capabilities for code blocks. Here's a demo of how everything looks.
+
+The following markdown cheatsheet is adapted from: https://guides.github.com/features/mastering-markdown/
+
+## What is Markdown?
+
+Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like `#` or `*`.
+
+## Syntax guide
+
+Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com or in your own text files.
+
+### Headers
+
+```md:test.md
+# This is a h1 tag
+
+## This is a h2 tag
+
+#### This is a h4 tag
+```
+
+# This is a h1 tag
+
+## This is a h2 tag
+
+#### This is a h4 tag
+
+## Text Emphasis
+
+```md:test.md
+_This text will be italic_
+
+**This text will be bold**
+
+_You **can** combine them_
+```
+
+_This text will be italic_
+
+**This text will be bold**
+
+_You **can** combine them_
+
+## Lists
+
+### Unordered
+
+```md:test.md
+- Item 1
+- Item 2
+  - Item 2a
+  - Item 2b
+```
+
+- Item 1
+- Item 2
+  - Item 2a
+  - Item 2b
+
+### Ordered
+
+```md:test.md
+1. Item 1
+1. Item 2
+1. Item 3
+   1. Item 3a
+   1. Item 3b
+```
+
+1. Item 1
+1. Item 2
+1. Item 3
+   1. Item 3a
+   1. Item 3b
+
+## Images
+
+```md:test.md
+![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+Format: ![Alt Text](url)
+```
+
+![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+
+## Links
+
+```md:test.md
+http://github.com - automatic!
+[GitHub](http://github.com)
+```
+
+http://github.com - automatic!
+[GitHub](http://github.com)
+
+## Blockquotes
+
+```md:test.md
+As Kanye West said:
+
+> We're living the future so
+> the present is our past.
+```
+
+As Kanye West said:
+
+> We're living the future so
+> the present is our past.
+
+## Inline code
+
+```md:test.md
+I think you should use an
+`<addr>` element here instead.
+```
+
+I think you should use an
+`<addr>` element here instead.
+
+## Syntax highlighting
+
+Here’s an example of how you can use syntax highlighting with [GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/):
+
+````
+```js:fancyAlert.js
+function fancyAlert(arg) {
+  if (arg) {
+    $.facebox({ div: '#foo' })
+  }
+}
+```
+````
+
+And here's how it looks - nicely colored with styled code titles!
+
+```js:fancyAlert.js
+function fancyAlert(arg) {
+  if (arg) {
+    $.facebox({ div: '#foo' })
+  }
+}
+```
+
+## Task Lists
+
+```md:test.md
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+```
+
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+
+## Tables
+
+You can create tables by assembling a list of words and dividing them with hyphens `-` (for the first row), and then separating each column with a pipe `|`:
+
+```md:test.md
+| First Header                | Second Header                |
+| --------------------------- | ---------------------------- |
+| Content from cell 1         | Content from cell 2          |
+| Content in the first column | Content in the second column |
+```
+
+| First Header                | Second Header                |
+| --------------------------- | ---------------------------- |
+| Content from cell 1         | Content from cell 2          |
+| Content in the first column | Content in the second column |
+
+## Strikethrough
+
+Any word wrapped with two tildes (like `~~this~~`) will appear ~~crossed out~~.
+
+## Learn More
+
+> - [Markdown Cheatsheet](https://www.markdownguide.org/cheat-sheet/)
+> - [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/)
+> - [Markdown Extended Syntax](https://www.markdownguide.org/extended-syntax/)
+
+## Markdown Playground
+
+You can try to write with `markdown` or `mdx` by going through this [website](https://nuflakbrr-markdown.vercel.app). I created the website specialy so that I can be helped when I'm making blog posts or snippets.
+
+## Follow Me!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[Twitter](https://www.twitter.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)
