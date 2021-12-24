@@ -1,0 +1,130 @@
+---
+title: 'React Hooks useClipboard'
+publishedAt: '2021-12-24'
+summary: 'Create Function Copy to Clipboard Button.'
+---
+
+## Introduction
+
+This time I will share how I create a copy to clipboard function using `React Hooks useClipboard` from `Chakra UI` as shown below.
+
+<img src="https://naufalakbar.me/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "20px"}} />
+
+## Imports
+
+The first thing we have to do is import what we will need.
+
+```js
+import { useClipboard } from '@chakra-ui/react'
+```
+
+## Usage
+
+Then how to use it? here is how to use it.
+
+```js
+function Example() {
+  const [value, setValue] = React.useState('Hello world')
+  const { hasCopied, onCopy } = useClipboard(value)
+
+  return (
+    <>
+      <Flex mb={2}>
+        <Input value={value} isReadOnly placeholder='Welcome' />
+        <Button onClick={onCopy} ml={2}>
+          {hasCopied ? 'Copied' : 'Copy'}
+        </Button>
+      </Flex>
+      <Editable placeholder='Paste here'>
+        <EditablePreview width='100%' />
+        <EditableInput />
+      </Editable>
+    </>
+  )
+}
+```
+
+## Complete Code
+
+That is a simple example, then how can I copy to clipboard in the form of `links`? let me show you how.
+
+```js:pages/blog/[slug].js
+import React, { useState } from 'react'
+import hydrate from 'next-mdx-remote/hydrate'
+import { getFiles, getFileBySlug } from '../../lib/mdx'
+import { useClipboard, Box, Heading, Link, Flex, Icon, Button, Input } from '@chakra-ui/react'
+import { FaShareSquare } from 'react-icons/fa'
+
+import BlogLayout from '../../layouts/blog'
+import MDXComponents from '../../components/MDXComponents'
+import Comments from '../../components/Comments'
+
+export default function Blog({ mdxSource, frontMatter, slug }) {
+    const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`)
+    const { hasCopied, onCopy } = useClipboard(value)
+
+    const content = hydrate(mdxSource, {
+        components: MDXComponents
+    })
+
+    return (
+        <BlogLayout frontMatter={frontMatter}>
+            {content}
+            <Heading as='h2' size='lg'>Share this Blog</Heading>
+            <Link _hover={{ opacity: .8 }} minWidth="100%">
+                <Flex align="center">
+                    <Input value={value} isReadOnly placeholder='Posts Link' />
+                    <Button ml={2} mr={2} p={6} onClick={onCopy}><Icon as={FaShareSquare} mr={2} /> {hasCopied ? 'Copied' : 'Share Link'}</Button>
+                </Flex>
+            </Link>
+            <Box width='100%' borderWidth='1px' borderRadius='xl' p={5}>
+                <Heading as="h2" size="lg" fontWeight={600} mb={4}>Comments</Heading>
+                <hr />
+                <Comments slug={frontMatter.slug} />
+            </Box>
+        </BlogLayout>
+    )
+}
+
+export async function getStaticPaths() {
+    const posts = await getFiles('blog')
+
+    return {
+        paths: posts.map((p) => ({
+            params: {
+                slug: p.replace(/\.mdx/, '')
+            }
+        })),
+        fallback: false
+    }
+}
+
+export async function getStaticProps({ params }) {
+    const post = await getFileBySlug('blog', params.slug)
+
+    return { props: post }
+}
+```
+
+What I emphasize here is:
+
+```js
+const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`)
+const { hasCopied, onCopy } = useClipboard(value)
+```
+
+With the line of code as above, it will produce output like this.
+
+<img src="https://naufalakbar.me/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "20px"}} />
+
+## Learn More about useClipboard
+
+> - [React Hooks useClipboard by Chakra UI](https://chakra-ui.com/docs/hooks/use-clipboard)
+
+## Follow Me!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[Twitter](https://www.twitter.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)
