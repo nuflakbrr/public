@@ -1,0 +1,133 @@
+---
+title: 'PHP Layouting'
+publishedAt: '2022-02-01'
+summary: 'Native PHP Layouts'
+---
+
+## Introduction
+
+This time I will share how I create a PHP Native Layouting as shown below.
+
+<img src="https://naufalakbar.me/images/snippets/php-layout/ex.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
+
+## Turn on Local Server
+
+The first thing we will do is, turn on the local server on our computer using the `XAMPP` application.
+
+<img src="https://naufalakbar.me/images/snippets/php-layout/xampp.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
+
+Then open `File Explorer` and go to your `xampp\htdocs\` folder. Then you create a special folder for this tutorial.
+
+## Open Code Editor
+
+Then open your code editor application and open the folder/workspace that you created earlier. And it's time to code!
+
+## Let's Code!
+
+```php:index.php
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- Wrapper div -->
+        <div id="wrapper">
+            <!-- Header div -->
+            <div id="header">
+                <?php
+                    include('header.php'); // File containing header code
+                ?>
+            </div>
+            <!-- Content div -->
+            <div id="content">
+                <!-- Left Col div -->
+                <div id="leftCol">
+                    <?php
+                        include('leftMenu.php'); // File containing the menu
+                    ?>
+                </div>
+                <!-- Center col -->
+                <div id="centerCol">
+                    <?php
+                        $page = $_GET['page']; // To get the page
+
+                        if($page == null) {
+                            $page = 'home'; // Set page to home, if not set
+                        }
+                        switch ($page) {
+
+                            case 'home':
+                                include('home.php');
+                                break;
+
+                            case 'about':
+                                include('about.php');
+                                break;
+
+                            case 'contact':
+                                include('contact.php');
+                                break;
+                        }
+                    ?>
+                </div>
+            </div>
+            <!-- Footer div -->
+            <div id="footer">
+                <?php
+                    include('footer.php'); // File containing the footer
+                ?>
+            </div>
+        </div>
+    </body>
+    </html>
+```
+
+```php:header.php
+    <?php
+        echo "This is header";   
+    ?>
+```
+
+```php:leftMenu.php
+    <?php
+        echo "<a href='./?page=home'>Home</a>";     // set page to home
+        echo "<a href='./?page=about'>About</a>";       // page = about
+        echo "<a href='./?page=contact'>Contact</a>";       // page = contact
+    ?>
+```
+
+```php:home.php
+    <?php
+        echo "This is home";   
+    ?>
+```
+
+```php:about.php
+    <?php
+        echo "This is about";   
+    ?>
+```
+
+```php:contact.php
+    <?php
+        echo "This is contact";   
+    ?>
+```
+
+```php:footer.php
+    <?php
+        echo "This is footer";   
+    ?>
+```
+
+## Follow Me!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[Twitter](https://www.twitter.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)
