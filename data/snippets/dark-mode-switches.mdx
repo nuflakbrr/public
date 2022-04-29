@@ -1,18 +1,19 @@
 ---
-title: 'Dark Mode Switches'
-publishedAt: '2021-12-16'
-summary: 'Dark Mode Switches with Vanilla JavaScripts.'
+title: 'Sakelar Mode Gelap'
+date: '2021-12-16'
+draft: false
+summary: 'Sakelar Mode Gelap dengan Vanila JavaScript.'
 ---
 
-This is my way of creating a dark mode switches with just HTML, SCSS, and vanilla JavaScripts. Let me tell you how.
+Ini adalah cara saya membuat sakelar mode gelap hanya dengan HTML, SCSS, dan Vanila JavaScript.
 
-## Procedures
+## Prosedur
 
-1. Create a folder with any name you want.
-2. Go into the folder you have created and enter your favorite text editor.
-3. Create an HTML file with the name `index.html`. Here's the syntax.
+1. Buat folder dengan nama apa pun yang Anda inginkan.
+2. Masuk ke folder yang telah Anda buat dan masukkan editor teks favorit Anda.
+3. Buat file HTML dengan nama `index.html`. Berikut sintaksnya.
 
-```html:index.html
+```html:index.html showLineNumbers
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -37,9 +38,9 @@ This is my way of creating a dark mode switches with just HTML, SCSS, and vanill
 </html>
 ```
 
-4. And then, let's we create the `styles.css`. Here's the syntax.
+4. Dan kemudian, mari kita buat `styles.css`. Berikut sintaksnya.
 
-```css:style.css
+```css:style.css showLineNumbers
 html {
     height: 100%;
     font-family: 'Montserrat';
@@ -140,9 +141,9 @@ html.transition *:after {
 }
 ```
 
-5. Last thing, we create the `script.js` file. Here's the syntax.
+5. Terakhir, kita buat file `script.js`. Berikut sintaksnya.
 
-```js:script.js
+```js:script.js showLineNumbers
 var checkbox = document.querySelector('input[name=theme]');
 
 checkbox.addEventListener('change', function() {
@@ -163,15 +164,15 @@ let trans = () => {
 }
 ```
 
-6. And so we have our **Dark Mode Switches** using HTML, SCSS, and Vanilla JavaScript!
+6. Jadi kita sudah memiliki **Sakelar Mode Gelap** menggunakan HTML, SCSS, dan Vanila JavaScript!
 
-[Demo site](https://nuflakbrr.github.io/dark-theme-switcher/)
+[Situs demo](https://nuflakbrr.github.io/dark-theme-switcher/)
 
-## Finishing Up
+## Menyelesaikan
 
-**Congratulation!** You have finished the tutorial on how to create a **Dark Mode Switches** using HTML, SCSS, Vanilla Javascript! I hope this blog can benefit you all and don't forget to share this blog to everyone! Thank you!
+**Selamat!** Anda telah menyelesaikan tutorial tentang cara membuat **Sakelar Mode Gelap** menggunakan HTML, SCSS, Vanila Javascript! Semoga cuplikan kode ini dapat memberi manfaat untuk kalian semua dan jangan lupa untuk membagikan cuplikan kode ini kepada semua orang! Terima kasih!
 
-## Follow Me!
+## Ikuti Saya!
 
 [Github](https://www.github.com/nuflakbrr)
 [Instagram](https://www.instagram.com/kbrnugroho)

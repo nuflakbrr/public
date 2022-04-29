@@ -1,61 +1,62 @@
 ---
 title: 'Hamburger Menu (TailwindCSS version).'
-publishedAt: '2021-12-20'
-summary: 'Hamburger Menu TailwindCSS version.'
+date: '2021-12-20'
+draft: false
+summary: 'Hamburger Menu versi TailwindCSS.'
 ---
 
-This is my way to create `Hamburger Menu` using `React.js` and `TailwindCSS` CSS framework. Check this out!
+Ini adalah cara saya membuat `Hamburger Menu` menggunakan kerangka kerja CSS `React.js` dan `TailwindCSS`.
 
-## Setup
+## Memulai
 
-1. Create a `React.js` project setup with the following syntax.
+1. Buat setup proyek `React.js` dengan sintaks berikut.
 
 ```bash:cmd
     $ npx create-react-app my-app
 
-    # or
+    # atau
 
     $ yarn create-react-app my-app
 ```
 
-2. Setup the TailwindCSS. [Read more about the steps](https://tailwindcss.com/docs/guides/create-react-app)
-3. Then open the project we just created into your favorite `code editor`.
-4. Next, install a package namely `react-router-dom`, here's the syntax. More about [react-router-dom](https://reactrouter.com/)
+2. Siapkan TailwindCSS. [Baca selengkapnya tentang langkah-langkahnya](https://tailwindcss.com/docs/guides/create-react-app)
+3. Kemudian buka proyek yang baru saja kita buat ke `editor kode` favorit Anda.
+4. Selanjutnya install package yaitu `react-router-dom`, berikut sintaksnya. Selengkapnya tentang [react-router-dom](https://reactrouter.com/)
 
 ```bash:cmd
     $ npm install react-router-dom@6
 
-    #or
+    #atau
 
     $ yarn add react-router-dom@6
 ```
 
-5. Then go to the `src` folder, and create `component` folder, and then create the `Navbars.js` file.
+5. Kemudian masuk ke folder `src`, dan buat folder `component`, lalu buat file `Navbars.js`.
 
-<img src="https://naufalakbar.me/images/snippets/hamburger-menu/tailwindcss.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
+<img src="https://naufalakbar.me/static/images/snippets/hamburger-menu/tailwindcss.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
 
-## Imports
+## Impor
 
-6. Next we will start by importing everything we need.
+6. Selanjutnya kita akan mulai dengan mengimpor semua yang kita butuhkan.
 
-```js:src/components/Navbars.js
+```js:src/components/Navbars.js showLineNumbers
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 ```
 
-## Using useState to Open and Close Navigation
+## Menggunakan useState untuk Membuka dan Menutup Navigasi
 
-7. Now that we have content, we need a way to show it. We can use `useState` for this case. Before the return statement, add the following:
+7. Sekarang kita memiliki konten, kita perlu cara untuk menunjukkannya. Kita dapat menggunakan `useState` untuk kasus ini. Sebelum pernyataan return, tambahkan berikut ini:
 
-```js:src/components/Navbars.js
+```js:src/components/Navbars.js showLineNumbers
 const [isMenuOpen, setIsMenuOpen] = useState(false);
 ```
 
-## Settings the Desktop Content and Mobile Content
+## Mengatur Konten Desktop dan Konten Seluler
 
-8. Next, we create the Navbars component. Follow the below code.
+8. Selanjutnya kita membuat komponen Navbars. Ikuti kode di bawah ini.
 
-```js:src/components/Navbars.js
+```js:src/components/Navbars.js showLineNumbers
 <div className="py-8">
     <div className="bg-blue-800 fixed left-0 right-0 top-0 z-50 shadow-lg">
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -172,11 +173,11 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
 </div>
 ```
 
-## The Complete Code
+## Kode Lenkap
 
-Here's the complete code.
+Berikut kode lengkapnya.
 
-```js:src/components/Navbars.js
+```js:src/components/Navbars.js showLineNumbers
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -304,7 +305,7 @@ function Navbars() {
 export default Navbars;
 ```
 
-## Follow Me!
+## Ikuti Saya!
 
 [Github](https://www.github.com/nuflakbrr)
 [Instagram](https://www.instagram.com/kbrnugroho)

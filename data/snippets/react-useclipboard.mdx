@@ -1,26 +1,27 @@
 ---
 title: 'React Hooks useClipboard'
-publishedAt: '2021-12-24'
-summary: 'Create Function Copy to Clipboard Button.'
+date: '2021-12-24'
+draft: false
+summary: 'Buat Tombol Fungsi Salin ke Papan Klip.'
 ---
 
-## Introduction
+## Perkenalan
 
-This time I will share how I create a copy to clipboard function using `React Hooks useClipboard` from `Chakra UI` as shown below.
+Kali ini saya akan membagikan bagaimana saya membuat fungsi copy to clipboard menggunakan `React Hooks useClipboard` dari `Chakra UI` seperti gambar di bawah ini.
 
-<img src="https://naufalakbar.me/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
+<img src="https://naufalakbar.me/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
 
-## Imports
+## Impor
 
-The first thing we have to do is import what we will need.
+Hal pertama yang harus kita lakukan adalah mengimpor apa yang kita butuhkan.
 
 ```js
 import { useClipboard } from '@chakra-ui/react'
 ```
 
-## Usage
+## Penggunaan
 
-Then how to use it? here is how to use it.
+Lalu bagaimana cara menggunakannya? berikut adalah cara menggunakannya.
 
 ```js
 function Example() {
@@ -44,11 +45,11 @@ function Example() {
 }
 ```
 
-## Complete Code
+## Kode Lengkap
 
-That is a simple example, then how can I copy to clipboard in the form of `links`? let me show you how.
+Itu adalah contoh sederhana, lalu bagaimana saya bisa menyalin ke clipboard dalam bentuk `link`? Mari saya tunjukkan bagaimana caranya.
 
-```js:pages/blog/[slug].js
+```js:pages/blog/[slug].js {12-13} showLineNumbers
 import React, { useState } from 'react'
 import hydrate from 'next-mdx-remote/hydrate'
 import { getFiles, getFileBySlug } from '../../lib/mdx'
@@ -106,22 +107,22 @@ export async function getStaticProps({ params }) {
 }
 ```
 
-What I emphasize here is:
+Yang saya tekankan disini adalah:
 
 ```js
 const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`)
 const { hasCopied, onCopy } = useClipboard(value)
 ```
 
-With the line of code as above, it will produce output like this.
+Dengan baris kode seperti di atas, maka akan menghasilkan output seperti ini.
 
-<img src="https://naufalakbar.me/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
+<img src="https://naufalakbar.me/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="800px" align="center" style={{borderRadius: "10px"}} />
 
-## Learn More about useClipboard
+## Pelajari Lebih Lanjut tentang useClipboard
 
-> - [React Hooks useClipboard by Chakra UI](https://chakra-ui.com/docs/hooks/use-clipboard)
+> - [React Hooks useClipboard oleh Chakra UI](https://chakra-ui.com/docs/hooks/use-clipboard)
 
-## Follow Me!
+## Ikuti Saya!
 
 [Github](https://www.github.com/nuflakbrr)
 [Instagram](https://www.instagram.com/kbrnugroho)

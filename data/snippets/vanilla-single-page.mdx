@@ -1,17 +1,18 @@
 ---
-title: 'Vanilla Single Page'
-publishedAt: '2021-12-10'
-summary: 'Vanilla Single Page With Vanilla JavaScripts.'
+title: 'Vanila Halaman tunggal'
+date: '2021-12-10'
+draft: false
+summary: 'Vanila Halaman Tunggal Dengan Vanila JavaScript.'
 ---
 
-This is my way of creating a single page with just HTML, SCSS, and vanilla JavaScripts. Let me tell you how.
+Ini adalah cara saya membuat satu halaman hanya dengan HTML, SCSS, dan Vanila JavaScript.
 
-## Procedures
+## Prosedur
 
-1. Before starting the project, make sure you already have `node.js` on your computer. If you don't have it, [download here](https://nodejs.org/en/).
-2. Create a folder with any name you want.
-3. Go into the folder you have created and enter your favorite text editor.
-4. Create an HTML file with the name `index.html`. Here's the syntax.
+1. Sebelum memulai proyek, pastikan Anda sudah memiliki `node.js` di komputer Anda. Jika Anda tidak memilikinya, [unduh di sini](https://nodejs.org/en/).
+2. Buat folder dengan nama apapun yang Anda inginkan.
+3. Masuk ke folder yang telah Anda buat dan masukkan editor teks favorit Anda.
+4. Buat file HTML dengan nama `index.html`. Berikut sintaksnya.
 
 ```html:index.html showLineNumbers
 <!DOCTYPE html>
@@ -41,31 +42,31 @@ This is my way of creating a single page with just HTML, SCSS, and vanilla JavaS
 </html>
 ```
 
-5. Then run the npm syntax.
+5. Kemudian jalankan sintaks npm.
 
 ```bash:cmd
     $ npm init -y
 ```
 
-or
+atau
 
 ```bash:cmd
    $ yarn init -y
 ```
 
-6. Then install the express module.
+6. Kemudian instal modul express.
 
 ```bash:cmd
     $ npm install express
 ```
 
-or
+atau
 
 ```bash:cmd
     $ yarn add express
 ```
 
-7. Then create a file with the name `server.js`. Here's the syntax.
+7. Kemudian buat file dengan nama `server.js`. Berikut sintaksnya.
 
 ```js:server.js showLineNumbers
 const express = require("express"); // this is where we load the package
@@ -82,15 +83,15 @@ res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
 app.listen(process.env.PORT || 4040, () => console.log("Server running...")); // the port where the server run
 ```
 
-8. Run the server with the following syntax.
+8. Jalankan server dengan sintaks berikut.
 
 ```bash:cmd
     $ node server.js
 ```
 
-9. And then go to your browser and visit the link `http://localhost:4040`.
-10. Then create a folder with the name `static` and in it there are 2 folders, namely the `js` and `scss` folders
-11. Then create a folder with the name `view`. in the view folder, create the page you want. in my case I made `Dasboard.js`, `FormatView.js`, `PostView.js`, `Posts.js`, `Settings.js`.
+9. Kemudian buka browser Anda dan kunjungi tautan `http://localhost:4040`.
+10. Kemudian buat folder dengan nama `static` dan di dalamnya terdapat 2 folder yaitu folder `js` dan `scss`
+11. Kemudian buat folder dengan nama `view`. di folder tampilan, buat halaman yang Anda inginkan. dalam kasus saya, saya membuat `Dasboard.js`, `FormatView.js`, `PostView.js`, `Posts.js`, `Settings.js`.
 
 ```js:static/js/view/FormatView.js showLineNumbers
 export default class {
@@ -186,7 +187,7 @@ export default class extends FormatView {
 }
 ```
 
-12. Then create a file with the name `index.js` and the following for the syntax.
+12. Kemudian buat file dengan nama `index.js` dan berikut sintaksnya.
 
 ```js:static/js/index.js showLineNumbers
 import Dashboard from "./view/Dashboard.js";
@@ -256,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-13. Then the moment that we have been waiting for, we make a stlying for the page that we have created.
+13. Kemudian saat yang kita tunggu-tunggu, kita membuat stlying untuk halaman yang telah kita buat.
 
 ```scss:static/scss/index.scss showLineNumbers
 body {
@@ -299,15 +300,15 @@ a {
 }
 ```
 
-14. And so we have our **Vanilla Single Page** using HTML, SCSS, and Vanilla JavaScript!
+14. Jadi kita memiliki **Vanila Halaman Tunggal** kita menggunakan HTML, SCSS, dan Vanila JavaScript!
 
-[Demo site](https://nuflakbrr.github.io/vanilla-singlepage/)
+[Situs demo](https://nuflakbrr.github.io/vanilla-singlepage/)
 
-## Finishing Up
+## Menyelesaikan
 
-**Congratulation!** You have finished the tutorial on how to create a **Vanilla Single Page** using HTML, SCSS, Vanilla Javascript! I hope this blog can benefit you all and don't forget to share this blog to everyone! Thank you!
+**Selamat!** Anda telah menyelesaikan tutorial cara membuat **Vanila Halaman Tunggal** menggunakan HTML, SCSS, Vanila Javascript! Semoga cuplikan kode ini dapat memberi manfaat untuk kalian semua dan jangan lupa untuk membagikan cuplikan kode ini kepada semua orang! Terima kasih!
 
-## Follow Me!
+## Ikuti Saya!
 
 [Github](https://www.github.com/nuflakbrr)
 [Instagram](https://www.instagram.com/kbrnugroho)
