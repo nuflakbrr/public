@@ -1,7 +1,8 @@
 {
     "origins": [
       "https://naufalakbar.me",
-      "https://www.naufalakbar.me"
+      "https://www.naufalakbar.me",
+      "https://nuflakbrr.vercel.app"
     ],
     "originsRegex": [
       "http:\/\/localhost:[0-9]+"
