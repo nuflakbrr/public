@@ -1,8 +1,8 @@
 ---
-title: 'React Hooks useClipboard'
-date: '2021-12-24'
+title: "React Hooks useClipboard"
+date: "2021-12-24"
 draft: false
-summary: 'Buat Tombol Fungsi Salin ke Papan Klip.'
+summary: "Buat Tombol Fungsi Salin ke Papan Klip."
 ---
 
 <TOCInline toc={props.toc} asDisclosure />
@@ -11,14 +11,14 @@ summary: 'Buat Tombol Fungsi Salin ke Papan Klip.'
 
 Kali ini saya akan membagikan bagaimana saya membuat fungsi copy to clipboard menggunakan `React Hooks useClipboard` dari `Chakra UI` seperti gambar di bawah ini.
 
-<img src="/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="900px" align="center" style={{borderRadius: "10px"}} />
+<img src="/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="auto" align="center" style={{ borderRadius: "10px" }} />
 
 ## Impor
 
 Hal pertama yang harus kita lakukan adalah mengimpor apa yang kita butuhkan.
 
 ```js
-import { useClipboard } from '@chakra-ui/react'
+import { useClipboard } from "@chakra-ui/react";
 ```
 
 ## Penggunaan
@@ -27,23 +27,23 @@ Lalu bagaimana cara menggunakannya? berikut adalah cara menggunakannya.
 
 ```js
 function Example() {
-  const [value, setValue] = React.useState('Hello world')
-  const { hasCopied, onCopy } = useClipboard(value)
+  const [value, setValue] = React.useState("Hello world");
+  const { hasCopied, onCopy } = useClipboard(value);
 
   return (
     <>
       <Flex mb={2}>
-        <Input value={value} isReadOnly placeholder='Welcome' />
+        <Input value={value} isReadOnly placeholder="Welcome" />
         <Button onClick={onCopy} ml={2}>
-          {hasCopied ? 'Copied' : 'Copy'}
+          {hasCopied ? "Copied" : "Copy"}
         </Button>
       </Flex>
-      <Editable placeholder='Paste here'>
-        <EditablePreview width='100%' />
+      <Editable placeholder="Paste here">
+        <EditablePreview width="100%" />
         <EditableInput />
       </Editable>
     </>
-  )
+  );
 }
 ```
 
@@ -112,13 +112,13 @@ export async function getStaticProps({ params }) {
 Yang saya tekankan disini adalah:
 
 ```js
-const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`)
-const { hasCopied, onCopy } = useClipboard(value)
+const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`);
+const { hasCopied, onCopy } = useClipboard(value);
 ```
 
 Dengan baris kode seperti di atas, maka akan menghasilkan output seperti ini.
 
-<img src="/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="900px" align="center" style={{borderRadius: "10px"}} />
+<img src="/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="auto" align="center" style={{ borderRadius: "10px" }} />
 
 ## Pelajari Lebih Lanjut tentang useClipboard
 
@@ -128,6 +128,6 @@ Dengan baris kode seperti di atas, maka akan menghasilkan output seperti ini.
 
 [Github](https://www.github.com/nuflakbrr)
 [Instagram](https://www.instagram.com/kbrnugroho)
-[Twitter](https://www.twitter.com/nuflakbrr)
-[Linkedin](https://www.linkedin.com/public-profile/in/nuflakbrr)
+[X](https://www.x.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/in/nuflakbrr)
 [Email](mailto:naufalakbar378@gmail.com)
