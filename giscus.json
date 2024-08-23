@@ -1,11 +1,4 @@
 {
-    "origins": [
-      "https://naufalakbar.me",
-      "https://www.naufalakbar.me",
-      "https://nuflakbrr.vercel.app",
-      "https://dev.nuflakbrr.vercel.app",
-    ],
-    "originsRegex": [
-      "http:\/\/localhost:[0-9]+"
-    ]
-  }
+  "origins": ["https://naufalakbar.me", "https://www.naufalakbar.me", "https://nuflakbrr.github.io"],
+  "originsRegex": ["http://localhost:[0-9]+"]
+}
