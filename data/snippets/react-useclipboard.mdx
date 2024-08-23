@@ -1,128 +1,140 @@
 ---
-title: "React Hooks useClipboard"
-date: "2021-12-24"
+title: React Hooks useClipboard
+date: '2024-8-11'
 draft: false
-summary: "Buat Tombol Fungsi Salin ke Papan Klip."
+summary: Membuat dan Menggunakan React Hooks useClipboard untuk salin ke papan klip.
 ---
 
 <TOCInline toc={props.toc} asDisclosure />
 
 ## Perkenalan
 
-Kali ini saya akan membagikan bagaimana saya membuat fungsi copy to clipboard menggunakan `React Hooks useClipboard` dari `Chakra UI` seperti gambar di bawah ini.
+Kali ini saya akan membagikan bagaimana saya membuat fungsi copy to clipboard menggunakan `React Hooks useClipboard`.
 
-<img src="/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="auto" align="center" style={{ borderRadius: "10px" }} />
+## Membuat Folder
 
-## Impor
+Hal pertama yang harus kita lakukan adalah membuat folder `hooks` dalam folder `src`. Apabila Anda tidak menggunakan folder `src`, Anda bisa langsung membuat folder `hooks`.
 
-Hal pertama yang harus kita lakukan adalah mengimpor apa yang kita butuhkan.
-
-```js
-import { useClipboard } from "@chakra-ui/react";
+```plaintext
+/
+└-- src/
+    |-- ...
+    |-- hooks/
+    |   └-- useClipboard.js (atau useClipboard.ts)
+    └-- ...
 ```
+
+## Membuat Hooks
+
+Selanjutnya kita akan membuat fungsi `useClipboard` yang akan kita gunakan.
+
+<Tabs defaultValue="js" className="pt-5 pb-1">
+  <TabsList>
+    <TabsTrigger value="js">useClipboard.js</TabsTrigger>
+    <TabsTrigger value="ts">useClipboard.ts</TabsTrigger>
+  </TabsList>
+  <TabsContent value="js">
+  ```jsx
+const useClipboard = () => {
+    const copy = async (txt) => {
+      try {
+        await navigator.clipboard.writeText(txt)
+        alert('Copied to clipboard!') // Anda dapat merubah line ini menjadi notifikasi yang lebih baik
+      } catch (err) {
+        alert('Failed to copy to clipboard!') // Anda dapat merubah line ini menjadi notifikasi yang lebih baik
+      }
+    }
+
+    return { copy }
+
+}
+
+export default useClipboard
+````
+  </TabsContent>
+  <TabsContent value="ts">
+```tsx
+const useClipboard = () => {
+  const copy = async (txt: string) => {
+    try {
+      await navigator.clipboard.writeText(txt)
+      alert('Copied to clipboard!') // Anda dapat merubah line ini menjadi notifikasi yang lebih baik
+    } catch (err) {
+      alert('Failed to copy to clipboard!') // Anda dapat merubah line ini menjadi notifikasi yang lebih baik
+    }
+  }
+
+  return { copy }
+
+}
+
+export default useClipboard
+```
+  </TabsContent>
+</Tabs>
 
 ## Penggunaan
 
 Lalu bagaimana cara menggunakannya? berikut adalah cara menggunakannya.
 
-```js
-function Example() {
-  const [value, setValue] = React.useState("Hello world");
-  const { hasCopied, onCopy } = useClipboard(value);
+<Tabs defaultValue="js" className="pt-5 pb-1">
+  <TabsList>
+    <TabsTrigger value="js">page.jsx</TabsTrigger>
+    <TabsTrigger value="ts">page.tsx</TabsTrigger>
+  </TabsList>
+  <TabsContent value="js">
+  ```jsx {4, 7, 13} showLineNumbers
+'use client'; // Jika Anda menggunakan Next.js App Router
+import React from 'react';
 
-  return (
-    <>
-      <Flex mb={2}>
-        <Input value={value} isReadOnly placeholder="Welcome" />
-        <Button onClick={onCopy} ml={2}>
-          {hasCopied ? "Copied" : "Copy"}
-        </Button>
-      </Flex>
-      <Editable placeholder="Paste here">
-        <EditablePreview width="100%" />
-        <EditableInput />
-      </Editable>
-    </>
-  );
-}
-```
+import useClipboard from '@/hooks/useClipboard';
 
-## Kode Lengkap
-
-Itu adalah contoh sederhana, lalu bagaimana saya bisa menyalin ke clipboard dalam bentuk `link`? Mari saya tunjukkan bagaimana caranya.
-
-```js:pages/blog/[slug].js {12-13} showLineNumbers
-import React, { useState } from 'react'
-import hydrate from 'next-mdx-remote/hydrate'
-import { getFiles, getFileBySlug } from '../../lib/mdx'
-import { useClipboard, Box, Heading, Link, Flex, Icon, Button, Input } from '@chakra-ui/react'
-import { FaShareSquare } from 'react-icons/fa'
-
-import BlogLayout from '../../layouts/blog'
-import MDXComponents from '../../components/MDXComponents'
-import Comments from '../../components/Comments'
-
-export default function Blog({ mdxSource, frontMatter, slug }) {
-    const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`)
-    const { hasCopied, onCopy } = useClipboard(value)
-
-    const content = hydrate(mdxSource, {
-        components: MDXComponents
-    })
+const Page = () => {
+    const { copy } = useClipboard();
 
     return (
-        <BlogLayout frontMatter={frontMatter}>
-            {content}
-            <Heading as='h2' size='lg'>Share this Blog</Heading>
-            <Link _hover={{ opacity: .8 }} minWidth="100%">
-                <Flex align="center">
-                    <Input value={value} isReadOnly placeholder='Posts Link' />
-                    <Button ml={2} mr={2} p={6} onClick={onCopy}><Icon as={FaShareSquare} mr={2} /> {hasCopied ? 'Copied' : 'Share Link'}</Button>
-                </Flex>
-            </Link>
-            <Box width='100%' borderWidth='1px' borderRadius='xl' p={5}>
-                <Heading as="h2" size="lg" fontWeight={600} mb={4}>Comments</Heading>
-                <hr />
-                <Comments slug={frontMatter.slug} />
-            </Box>
-        </BlogLayout>
-    )
-}
+      <section className="flex items-center justify-center mx-auto min-h-screen">
+        <button
+          type="button"
+          onClick={() => copy('Hello, world!')}
+          className="p-2 m-2 text-white bg-blue-500 rounded-md"
+        >
+          Copy to clipboard
+        </button>
+      </section>
+    );
+};
 
-export async function getStaticPaths() {
-    const posts = await getFiles('blog')
+export default Page;
+````
+  </TabsContent>
+  <TabsContent value="ts">
+```tsx {4, 7, 13} showLineNumbers
+'use client'; // Jika Anda menggunakan Next.js App Router
+import { FC } from 'react';
 
-    return {
-        paths: posts.map((p) => ({
-            params: {
-                slug: p.replace(/\.mdx/, '')
-            }
-        })),
-        fallback: false
-    }
-}
+import useClipboard from '@/hooks/useClipboard';
 
-export async function getStaticProps({ params }) {
-    const post = await getFileBySlug('blog', params.slug)
+const Page: FC = () => {
+  const { copy } = useClipboard();
 
-    return { props: post }
-}
+  return (
+    <section className="flex items-center justify-center mx-auto min-h-screen">
+      <button
+        type="button"
+        onClick={() => copy('Hello, world!')}
+        className="p-2 m-2 text-white bg-blue-500 rounded-md"
+      >
+        Copy to clipboard
+      </button>
+    </section>
+  );
+};
+
+export default Page;
 ```
-
-Yang saya tekankan disini adalah:
-
-```js
-const [value, setValue] = useState(`https://naufalakbar.me/blog/${frontMatter.slug}`);
-const { hasCopied, onCopy } = useClipboard(value);
-```
-
-Dengan baris kode seperti di atas, maka akan menghasilkan output seperti ini.
-
-<img src="/static/images/snippets/useClipboard/example.png" alt="Snippets Assets" width="auto" align="center" style={{ borderRadius: "10px" }} />
-
-## Pelajari Lebih Lanjut tentang useClipboard
-
-> - [React Hooks useClipboard oleh Chakra UI](https://chakra-ui.com/docs/hooks/use-clipboard)
+  </TabsContent>
+</Tabs>
 
 ## Ikuti Saya!
 

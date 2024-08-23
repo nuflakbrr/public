@@ -1,0 +1,240 @@
+---
+title: React Hooks useScreenSize
+date: '2024-08-10'
+draft: false
+summary: Membuat dan Menggunakan React Hooks useScreenSize untuk mendapatkan ukuran layar.
+---
+
+<TOCInline toc={props.toc} asDisclosure />
+
+## Perkenalan
+
+Kali ini saya akan membagikan bagaimana saya membuat fungsi mendapatkan ukuran layar menggunakan `React Hooks useScreenSize`.
+
+<video controls>
+  <source
+    src="https://nuflakbrr.github.io/static/images/snippets/useScreenSize/example.mp4"
+    type="video/mp4"
+  />
+</video>
+
+## Membuat Folder
+
+Hal pertama yang harus kita lakukan adalah membuat folder `hooks` dalam folder `src`. Apabila Anda tidak menggunakan folder `src`, Anda bisa langsung membuat folder `hooks`.
+
+```plaintext
+/
+└-- src/
+    |-- ...
+    |-- hooks/
+    |   └-- useScreenSize.js (atau useScreenSize.ts)
+    └-- ...
+```
+
+## Impor
+
+Selanjutnya, kita akan mengimpor apa yang kita butuhkan.
+
+```js
+import { useState, useEffect } from 'react'
+```
+
+> [!NOTE]
+> Apabila Anda menggunakan Next.js App Router, Anda bisa mengimpor melakukan seperti ini.
+
+```js
+'use client'
+import { useState, useEffect } from 'react'
+```
+
+## Membuat Tipe Data (Typescript)
+
+Selanjutnya kita akan membuat tipe data yang akan kita gunakan.
+
+> [!NOTE]
+> Apabila Anda tidak menggunakan Typescript, Anda bisa melewati langkah ini.
+
+```ts
+type ScreenSize = {
+  width: number
+  height: number
+}
+```
+
+## Membuat Hooks
+
+Selanjutnya kita akan membuat fungsi `useScreenSize` yang akan kita gunakan.
+
+<Tabs defaultValue="js" className="pt-5 pb-1">
+  <TabsList>
+    <TabsTrigger value="js">useScreenSize.js</TabsTrigger>
+    <TabsTrigger value="ts">useScreenSize.ts</TabsTrigger>
+  </TabsList>
+  <TabsContent value="js">
+  ```jsx
+const useScreenSize = () => {
+    const [screenSize, setScreenSize] = useState({
+      width: 0,
+      height: 0,
+    })
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+      setIsClient(true)
+
+      const handleResize = () => {
+        setScreenSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }
+
+      handleResize()
+
+      window.addEventListener('resize', handleResize)
+
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
+    }, [])
+
+    if (!isClient) {
+      return undefined
+    }
+
+    if (screenSize.width <= 374) {
+      return 'Mobile XS'
+    } else if (screenSize.width >= 375 && screenSize.width <= 424) {
+      return 'Mobile M'
+    } else if (screenSize.width >= 425 && screenSize.width <= 765) {
+      return 'Mobile L'
+    } else if (screenSize.width >= 768 && screenSize.width <= 1023) {
+      return 'Tablet'
+    } else if (screenSize.width >= 1024 && screenSize.width <= 1439) {
+      return 'Laptop'
+    } else if (screenSize.width >= 1440 && screenSize.width <= 2559) {
+      return 'Laptop LG'
+    } else if (screenSize.width >= 2560) {
+      return 'Laptop XL'
+    }
+
+    return undefined
+}
+
+export default useScreenSize
+````
+  </TabsContent>
+  <TabsContent value="ts">
+```tsx
+const useScreenSize = (): string | undefined => {
+  const [screenSize, setScreenSize] = useState<ScreenSize>({
+    width: 0,
+    height: 0,
+  })
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  if (!isClient) {
+    return undefined
+  }
+
+  if (screenSize.width <= 374) {
+    return 'Mobile XS'
+  } else if (screenSize.width >= 375 && screenSize.width <= 424) {
+    return 'Mobile M'
+  } else if (screenSize.width >= 425 && screenSize.width <= 765) {
+    return 'Mobile L'
+  } else if (screenSize.width >= 768 && screenSize.width <= 1023) {
+    return 'Tablet'
+  } else if (screenSize.width >= 1024 && screenSize.width <= 1439) {
+    return 'Laptop'
+  } else if (screenSize.width >= 1440 && screenSize.width <= 2559) {
+    return 'Laptop LG'
+  } else if (screenSize.width >= 2560) {
+    return 'Laptop XL'
+  }
+
+  return undefined
+}
+
+export default useScreenSize
+```
+  </TabsContent>
+</Tabs>
+
+## Penggunaan
+
+Lalu bagaimana cara menggunakannya? berikut adalah cara menggunakannya.
+
+<Tabs defaultValue="js" className="pt-5 pb-1">
+  <TabsList>
+    <TabsTrigger value="js">page.jsx</TabsTrigger>
+    <TabsTrigger value="ts">page.tsx</TabsTrigger>
+  </TabsList>
+  <TabsContent value="js">
+  ```jsx {4, 7, 11} showLineNumbers
+'use client'; // Jika Anda menggunakan Next.js App Router
+import React from 'react';
+
+import useScreenSize from '@/hooks/useScreenSize';
+
+const Page = () => {
+    const screenSize = useScreenSize();
+
+    return (
+      <section className="flex items-center justify-center mx-auto min-h-screen">
+        <h1>{screenSize}</h1>
+      </section>
+    );
+};
+
+export default Page;
+````
+  </TabsContent>
+  <TabsContent value="ts">
+```tsx {4, 7, 11} showLineNumbers
+'use client'; // Jika Anda menggunakan Next.js App Router
+import { FC } from 'react';
+
+import useScreenSize from '@/hooks/useScreenSize';
+
+const Page: FC = () => {
+  const screenSize = useScreenSize();
+
+  return (
+    <section className="flex items-center justify-center mx-auto min-h-screen">
+      <h1>{screenSize}</h1>
+    </section>
+  );
+};
+
+export default Page;
+```
+  </TabsContent>
+</Tabs>
+
+## Ikuti Saya!
+
+[Github](https://www.github.com/nuflakbrr)
+[Instagram](https://www.instagram.com/kbrnugroho)
+[X](https://www.x.com/nuflakbrr)
+[Linkedin](https://www.linkedin.com/in/nuflakbrr)
+[Email](mailto:naufalakbar378@gmail.com)
